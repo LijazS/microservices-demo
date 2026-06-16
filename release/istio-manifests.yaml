@@ -54,3 +54,171 @@ spec:
           name: frontend
           port: 80
           weight: 1
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: productcatalogservice-route
+  namespace: default
+spec:
+  parentRefs:
+    - name: my-gateway
+      namespace: default
+      sectionName: http
+
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /hipstershop.ProductCatalogService/
+
+      backendRefs:
+        - group: ""
+          kind: Service
+          name: productcatalogservice
+          port: 3550
+          weight: 1
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: currencyservice-route
+  namespace: default
+spec:
+  parentRefs:
+    - name: my-gateway
+      namespace: default
+      sectionName: http
+
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /hipstershop.CurrencyService/
+
+      backendRefs:
+        - group: ""
+          kind: Service
+          name: currencyservice
+          port: 7000
+          weight: 1
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: cartservice-route
+  namespace: default
+spec:
+  parentRefs:
+    - name: my-gateway
+      namespace: default
+      sectionName: http
+
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /hipstershop.CartService/
+
+      backendRefs:
+        - group: ""
+          kind: Service
+          name: cartservice
+          port: 7070
+          weight: 1
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: recommendationservice-route
+  namespace: default
+spec:
+  parentRefs:
+    - name: my-gateway
+      namespace: default
+      sectionName: http
+
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /hipstershop.RecommendationService/
+
+      backendRefs:
+        - group: ""
+          kind: Service
+          name: recommendationservice
+          port: 8080
+          weight: 1
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: shippingservice-route
+  namespace: default
+spec:
+  parentRefs:
+    - name: my-gateway
+      namespace: default
+      sectionName: http
+
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /hipstershop.ShippingService/
+
+      backendRefs:
+        - group: ""
+          kind: Service
+          name: shippingservice
+          port: 50051
+          weight: 1
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: checkoutservice-route
+  namespace: default
+spec:
+  parentRefs:
+    - name: my-gateway
+      namespace: default
+      sectionName: http
+
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /hipstershop.CheckoutService/
+
+      backendRefs:
+        - group: ""
+          kind: Service
+          name: checkoutservice
+          port: 5050
+          weight: 1
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: adservice-route
+  namespace: default
+spec:
+  parentRefs:
+    - name: my-gateway
+      namespace: default
+      sectionName: http
+
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /hipstershop.AdService/
+
+      backendRefs:
+        - group: ""
+          kind: Service
+          name: adservice
+          port: 9555
+          weight: 1

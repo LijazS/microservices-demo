@@ -40,3 +40,122 @@ spec:
     backendRefs:
     - name: frontend
       port: 80
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: productcatalogservice-route
+spec:
+  parentRefs:
+  - name: istio-gateway
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /hipstershop.ProductCatalogService/
+    backendRefs:
+    - name: productcatalogservice
+      port: 3550
+      weight: 1
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: currencyservice-route
+spec:
+  parentRefs:
+  - name: istio-gateway
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /hipstershop.CurrencyService/
+    backendRefs:
+    - name: currencyservice
+      port: 7000
+      weight: 1
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: cartservice-route
+spec:
+  parentRefs:
+  - name: istio-gateway
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /hipstershop.CartService/
+    backendRefs:
+    - name: cartservice
+      port: 7070
+      weight: 1
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: recommendationservice-route
+spec:
+  parentRefs:
+  - name: istio-gateway
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /hipstershop.RecommendationService/
+    backendRefs:
+    - name: recommendationservice
+      port: 8080
+      weight: 1
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: shippingservice-route
+spec:
+  parentRefs:
+  - name: istio-gateway
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /hipstershop.ShippingService/
+    backendRefs:
+    - name: shippingservice
+      port: 50051
+      weight: 1
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: checkoutservice-route
+spec:
+  parentRefs:
+  - name: istio-gateway
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /hipstershop.CheckoutService/
+    backendRefs:
+    - name: checkoutservice
+      port: 5050
+      weight: 1
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: adservice-route
+spec:
+  parentRefs:
+  - name: istio-gateway
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /hipstershop.AdService/
+    backendRefs:
+    - name: adservice
+      port: 9555
+      weight: 1
